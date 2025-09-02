@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Sidebar + Translator</title>
+  <style>
+    body {
+      margin: 100;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Hidden checkboxes */
+    input[type="checkbox"] { display: none; }
+
+    /* Sidebar toggle button */
+    .sidebar-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #333;
+      color: white;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    /* Hide menu when sidebar open */
+    #sidebar-toggle:checked ~ .sidebar-btn { display: none; }
+
+    /* Sidebar panel */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 250px;
+      height: 100%;
+      background: #f4f4f4;
+      padding: 20px 15px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      transition: left 0.3s;
+      z-index: 999;
+    }
+    #sidebar-toggle:checked ~ .sidebar { left: 0; }
+
+    /* Back button inside sidebar */
+    .back-btn {
+      display: block;
+      background: #2563eb;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    /* App list */
+    .app-list { list-style: none; padding: 0; margin: 0; }
+    .app-list li { margin: 12px 0; }
+
+    .app-btn {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border: none;
+      background: none;
+      font-size: 15px;
+      color: #222;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .app-btn:hover { background: #e5e7eb; }
+
+    /* App icons */
+    .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    .linkedin { background: #0A66C2; }
+    .whatsapp { background: #25D366; }
+    .outlook { background: #0078D4; }
+    .powerpoint { background: #D24726; }
+    .edge { background: #0078D7; }
+    .excel { background: #217346; }
+    .word { background: #2B579A; }
+    .copilot { background: #9333EA; }
+    .paint { background: #F59E0B; }
+
+    /* Translator toggle button */
+    .translator-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: #333;
+      color: rgba(255, 255, 255, 0.856);
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #translator-toggle:checked ~ .translator-btn { background: #9cc6ea; }
+
+    /* Translator panel */
+    .translator {
+      position: fixed;
+      top: 80px;
+      right: -320px;
+      width: 300px;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: -2px 2px 8px rgba(0,0,0,0.2);
+      transition: right 0.3s;
+      z-index: 999;
+    }
+    #translator-toggle:checked ~ .translator { right: 20px; }
+
+    .translator h2 { margin-top: 0; font-size: 16px; }
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: #0078d7;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <input type="checkbox" id="sidebar-toggle">
+  <label for="sidebar-toggle" class="sidebar-btn">☰</label>
+  <div class="sidebar">
+    <label for="sidebar-toggle" class="back-btn">← Back</label>
+    <ul class="app-list">
+      <li><button class="app-btn"><span class="icon linkedin">in</span> LinkedIn</button></li>
+      <li><button class="app-btn"><span class="icon whatsapp">W</span> WhatsApp</button></li>
+      <li><button class="app-btn"><span class="icon outlook">O</span> Outlook</button></li>
+      <li><button class="app-btn"><span class="icon powerpoint">P</span> PowerPoint</button></li>
+      <li><button class="app-btn"><span class="icon edge">E</span> Edge</button></li>
+      <li><button class="app-btn"><span class="icon excel">X</span> Excel</button></li>
+      <li><button class="app-btn"><span class="icon word">W</span> Word</button></li>
+      <li><button class="app-btn"><span class="icon copilot">C</span> Copilot</button></li>
+      <li><button class="app-btn"><span class="icon paint">🎨</span> Paint</button></li>
+    </ul>
+  </div>
+
+  <!-- Translator -->
+  <input type="checkbox" id="translator-toggle">
+  <label for="translator-toggle" class="translator-btn">T</label>
+  <div class="translator">
+    <h2>English → Tamil</h2>
+    <textarea placeholder="Enter English text..."></textarea>
+    <textarea placeholder="Translated Tamil text..."></textarea>
+    <button class="submit-btn">Submit</button>
+  </div>
+
+</body>
+</html>
